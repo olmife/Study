@@ -1,0 +1,674 @@
+Git
+	
+MC
+	выделение или снятие + - , часть отмечать *
+	ctrl + R обновить
+	Ctrl + х, затем с меняем права
+	Ctrl + х, затем о меняем пользователя
+	Ctrl + s  поиск
+	Ctrl + x+ s  Ctrl + x+l быстрое создание символической ссылки
+	Ctrl + \ переход в быстрые каталоги
+	Ctrl + x+h добавление в быстрые каталоги
+	Ctrl + x+i свойтва файла
+	Ctrl + x+q просмотр по фйалам
+	Alt + o октрыть в соседней панели
+	Ctrl + x и Ctrl + d выполнить сравнение и слияние
+
+NANO
+	запускать с ключем -u для undo 
+	Alt + U отмена действия
+	Ctrl + ^ или  начать выделение
+	Alt + 6 копия
+	Ctrl + u вставить
+	Сtrl + Space  на слово вперед
+	Alt + Space на слово назад
+	Alt + \ в конец Alt + ? в начало
+	Ctrl+k вырезать строку
+	Ctrl + w поиск
+
+Linux
+	install:
+	виртуалка 4 г хдд от 40
+	создать новый виртальный хдд
+	после создание подмонтировать образ линуха в CD
+	LVM убираем, в авто создает автоматически
+	Standart partition +
+	/boot 1G ext4 on auto
+	/  40G xft file system on auto
+	можно Swap 8G
+		 
+	ls fi* покажет все fi в папке
+	mkdir создать папку
+	rmdir удаление пустой папки
+	rm  удаление файлов -r выполнить рекурсивное удоление -rf (force) тоже
+	cp копир
+	echo 13 > file перенаправили поток 13 и создали новвый файл 
+	cat кантанация вывод посмтреть сожержимое текстового файла
+	cat 1 3 > 4 склейка содержимого файлов и перенаправление в 4
+	grep user /etc/passwd поиск user в файле
+	grep ^user /etc/passwd якорь в начале строки  
+	egrep '^user /etc/passwd якорь в начале строк (extended grep)
+	touch создает файл 
+	pwd полный путь к директории
+	Ctrl+d прекращение потока данных
+	< строит входной поток
+	less утилта с возможностью прокрутки
+	tail или head начало или коней #tail -4 путь
+	tail -f {path} # Режим отслеживания изменений
+	{flow} >> {path} #adding some flow into file 
+	sort #sorting utili
+	id #shows groups for local user
+	ps # processes
+	ps -f # show hwo start the process and parent process
+	ps - a- -u -x ps aux #all prsocees
+	top # shows pracess by cpu
+	in top press 'k' like 'kill'
+	$PATH #show content of PATH var.
+	which [util] #info of utilit
+	cat /dev/zero #generating 0 byts
+	/dev/null
+	& # start in background
+	jobs #show bg process
+		kill [pid] # stops the process TERMINATED
+		kill -9 [pid] #hard stop KILLED
+		ctrl+z while process # makes STOP
+		fg or bg  [jobs.id] #starts proces in BG or FG mode
+	process finish code :
+		0 normal 
+		$ #show finish code echo $?
+	shells:
+		sh #to call sh
+	find [path] {parametr} #find like -name {parametr}
+	find / -name file21 2> /dev/null #find without mistakes
+	variables:
+		VAR1='123' #declare variable
+		echo $VAR1 #look inside VAR1
+		unset VAR1 #remove
+	echo 'ls' > test.sh #make do file
+		chmod +x test.sh #add rights
+		./test.sh #execute
+		export PATH=$PATH:/{local path} # to execute without ./
+network
+	/etc/sysconfig/network-scripts/
+	/etc/resov.conf #reload after reboot
+	/etc/hosts		
+	/etc/hostname
+	ifconfig or ip a #interfaces
+	ls /sys/class/net/ #if names only
+	
+	systemctl disable NetworkManager #deny autostart network manager
+	systemctl mask NetworkManager #deny other process to start NM	
+	/etc/network/interfaces		
+	    pre-up - выполнить команду перед запуском интерфейса;
+	    post-up - выполнить команду после запуска интерфейса;
+	    up - выполнить команду при запуске интерфейса;
+	    pre-down - команда перед отключением;
+	    post-down - команда после отключения;
+	    iface - указывает имя интерфейса;
+	    inet - указывает
+	    description - создать имя синоним для устройства;
+	    address - устанавливает ip адрес для статического соединения;
+	    netmask - установка маски сети;
+	    broadcast - широковещательный адрес;
+	    metric - приоритет для шлюза по умолчанию;
+	    gateway - шлюз по умолчанию;
+	    hwaddress - установить MAC адрес;
+	    mtu - размер одного пакета.
+	    Debian DHCP
+				auto eth0
+				iface eth0 inet dhcp			
+				nameserver 8.8.8.8
+			static:
+				iface eth0 inet static
+				address 192.168.1.15
+				netmask 255.255.255.0
+				gateway 192.168.1.1
+				broadcast 192.168.0.255
+				dns-nameservers 8.8.8.8			
+		CentOS
+			
+	
+Hostname
+	vi /etc/hostname
+	vi /etc/hosts #add to local host hostname
+	
+Управление модулями ядра
+
+   Загрузка модуля командой modprobe:
+
+   # modprobe e1000
+
+   выгрузка модуля:
+
+   # modprobe -r e1000
+
+   после этого проверьте работу сети и загрузите модуль.
+
+   Список загруженных модулей:
+
+   # lsmod
+
+4. Монтирование файловых систем
+
+   Файл /etc/fstab  содержит список монтируемых при загрузке
+   файловых систем (разделов)
+
+   При внесении изменений в этот файл рекомендуется выполниеть проверку
+   командой
+
+   # mount -a
+
+   иначе есть риск получить незагружаемую систему.
+
+
+5. Система инициализации (SystemV, systemd)
+
+   Информация:
+   https:/ /www.thegeekdiary.com/rhel-centos-7-how-to-set-default-target-replaced-runlevel/
+   https://habr.com/ru/company/southbridge/blog/255845/
+
+   SystemV (не используется):
+
+спользует директорию /etc/init.d для хранения скриптов загрузки сервисов
+   Директории /etc/rc*.d - содержат линки на скрипты в init.d.
+
+   Runlevel 0  - остановка системы
+   Runlevel 1  - однопользовательский режим
+   Runlevel 3  - режим нормальной работы сервера без графики
+   Runlevel 5  - режим нормальной работы сервера с графикой
+   Runlevel 6  - перезагрузка системы
+
+
+   systemd:
+
+   Актуальная система загрузки. Использует понятия unit, target.
+
+   Основная команда - systemctl
+
+   Runlevel     Target Units                            Description
+   0            runlevel0.target, poweroff.target       Shut down and power off the system.
+   1            runlevel1.target, rescue.target         Set up a rescue shell.
+   2            runlevel2.target, multi-user.target     Set up a non-graphical multi-user system.
+   3            runlevel3.target, multi-user.target     Set up a non-graphical multi-user system.
+   4            runlevel4.target, multi-user.target     Set up a non-graphical multi-user system.
+   5            runlevel5.target, graphical.target      Set up a graphical multi-user system.
+   6            runlevel6.target, reboot.target         Shut down and reboot the system.
+
+   Изменение target:
+
+   # systemctl isolate multi-user.target
+
+   # systemctl isolate graphical.target
+
+
+   Изменение default.target:
+
+   # systemctl set-default multi-user.target
+   #init еще работает типа init 0 выкл
+
+systemctl restart NetwokManager #restart , start, stop...
+систма журналирования 
+	# journalctl 
+выводит последние данные
+	# journalctl -xe 
+
+Модуль 06. Пользователи и безопасность (2 часа т:1 п:1)
+
+- Управление базой данных пользователей и групп
+- Аутентификация и авторизация пользователей
+- Повышение привилегий в системе
+- Пакет sudo
+
+
+Практика
+
+1. Управление базой данных пользователей и групп
+
+   Информация:
+   https://meliorem.ru/tools/linux/centos7/kak-dobavit-i-udalit-novyx-polzovatelej-v-centos/
+
+
+   Файл /etc/passwd - список пользователей
+# то 1000 как правило юзвери до системные пользователи
+   Файл /etc/group  - список групп
+# как правило пользователь создается и группа
+   Файл /etc/shadow - БД паролей и параметров безопасности
+# !! заблоченные пользователи , после чего хеш пароля
+# справка по полям man 5 shadow
+# не принято править вручную
+   
+Добавление нового пользователя:
+
+   # useradd test
+   комментарий для полльзователя 
+   #  
+   Установка домашнего каталога:
+
+   # usermod -d /home/test test
+
+   Изменение пароля пользователя:
+
+  # passwd test
+
+   Другие утилиты для изменения пароля:
+
+   # chpasswd
+
+   послать пароль коамандой
+   #echo "test:[new passwor]" | chpasswd
+
+   Добавление новой группы:
+
+   # groupadd group1
+
+   Принадлежность к группам:
+
+   # usermod -G group1 -g test test
+
+   Проверка:
+
+   # id test
+
+   Блокировка:
+
+   # passwd -l test
+
+   Снятие блокировки - задать новый пароль.
+
+   Команда chpassw - изменение срока жизни пароля и др. параметров
+   в файле /etc/shadow
+  # passwd test
+
+   Другие утилиты для изменения пароля:
+
+   # chpasswd
+
+   Добавление новой группы:
+
+   # groupadd group1
+
+   Принадлежность к группам:
+
+   # usermod -G group1 -g test test
+
+   Проверка:
+
+   # id test
+
+   Блокировка:
+
+   # passwd -l test
+   
+   # vi /etc/security/pwquality.conf
+   Конфигурация сложности пароля
+
+# authselect или authcofig
+
+утилита для конфиг сложности пароля
+
+
+
+добайвляется в /etc/shadow/  два !!  кпользователю
+   Снятие блокировки - задать новый пароль.
+
+   Команда chзфыыцв - изменение срока жизни пароля и др. параметров
+   в файле /etc/shadow
+2. Аутентификация и авторизация пользователей
+
+   Информация:
+   http://rus-linux.net/kos.php?name=/book1/gl-04/gl_04_05.html
+   https://ru.wikipedia.org/wiki/Chmod
+
+
+   Модули PAM
+
+   /etc/pam.d
+
+   Атрибуты файлов, определяющие доступ:
+
+   rwx - чтение, запись, исполнение
+
+   Три уровня доступа - владелец, группа, все остальные
+
+   rwxrwxrwx
+
+   Команда ls -l
+
+   Изменение владельца файла:
+
+   # chown test:test file1
+  # chgrp group1 file2
+
+   Изменение атрибутов файлов:
+
+   # chmod ugo+rwx file3
+
+   # chmod 777 file4
+
+3. Повышение привилегий в системе
+
+   Информация:
+   https://centos.name/?page/tipsandtricks/becomingroot
+
+   Команда su:
+
+   # su - 
+1
+   # su
+
+   # su - test
+
+
+4. Пакет sudo
+
+   Информация:
+   https://www.8host.com/blog/redaktirovanie-fajla-sudoers-v-ubuntu-i-centos/
+
+   Команда visudo
+export EDITOR=mcedit
+и потом опять visudo чтоб через mcedit
+
+ Разрешим группе wheel выполнять команды без указания пароля:
+
+   %wheel  ALL=(ALL)       NOPASSWD: ALL
+
+Модуль 07. Управление доступом к файлам при
+          помощи разрешений файловой системы Linux (3 часа т:1 п:2)
+
+- Права доступа
+- Права при создании объектов ( umask )
+- Специализированные права доступа ( SUID / SGID / Sticky bit )
+
+
+Практика
+
+  Атрибуты файлов, определяющие доступ:
+
+   rwx - чтение, запись, исполнение
+
+   Три уровня доступа - владелец, группа, все остальные
+
+   rwxrwxrwx
+
+   Команда ls -l
+
+   Создайте файлы file1, file2, file3
+
+   # touch file{1,2,3}
+
+   Изменение владельца файла:
+  # chown test:test file1
+   # chgrp group1 file2
+
+   Изменение атрибутов файлов:
+
+   # chmod ugo+rwx file3
+ 
+   # chmod 777 file4
+  
+  #chmod g+w,o+x file3 
+	
+
+   При создании файлов из маски 666 вычитается значение umask
+
+   # umask
+
+     0022
+
+   # touch file10
+
+   # ls -l file10
+
+     -rw-r--r--. 1 root root    0 Jan 22 08:33 file10
+     что дает нам 644 (666-0022)
+
+   При создании директории вычитание umask производится из 777
+
+   # mkdir d1
+
+   # ls -l
+
+     drwxr-xr-x. 2 roo t root    6 Jan 22 08:34 d1
+  что дает нам 755 (777-0022)
+
+   Значение umask можно изменить:
+
+   # umask 0021
+
+   SUID, SGID, Sticky bit
+
+   SUID и SGID позволяют процессам запускаться с правами владельца файла,
+   а не наследовать права запускающего.
+
+   Установка SUID:
+
+   $ cp /usr/bin/touch .
+
+   $ ls -l touch
+
+     -rwxr-xr-x. 1 user user 109776 Jan 22 08:38 touch
+
+   $ chmod u+s touch
+
+   $ ls -l touch
+
+     -rwsr-xr-x. 1 user user 109776 Jan 22 08:38 touch
+
+   $ chmod g+s touch
+
+   $ ls -l touch
+
+   -rwsr-sr-x. 1 user user 109776 Jan 22 08:38 touch
+  Sticky bit устанавливается для директорий, и позволяет удалять только те
+   файлы, которые принадлежат пользователю, даже если на уровне директории
+   имеется полный доступ к другим файлам.
+
+   Установка:
+
+   $ mkdir d2
+
+   $ ls -l
+
+     drwxrwxr-x. 2 user user      6 Jan 22 08:48 sss
+
+   $ chmod +t d2
+
+   $ ls -l
+
+     drwxrwxr-t. 2 user user      6 Jan 22 08:48 sss
+
+which passwd 
+выдачт адрес, ls -l {адрес}
+ 
+Модуль 8. Использование возможностей ACL  (2 часа т:1 п:1)
+
+·         Лист контроля доступа ( ACL )
+·         Примеры использования ACL
+ 
+Практика
+
+Информация:
+https://wiki.archlinux.org/index.php/Access_Control_Lists_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
+https://linux-admins.ru/article.php?id_article=26
+. Создадим текстовый файл /abcd.txt от имени root
+
+   # echo "12345">/abcd.txt
+
+   Обычный пользователь test не может модифицировать этот файл:
+
+   $ touch /abcd.txt
+       touch: cannot touch '/abcd.txt': Permission denied
+
+   С помощью механизма ACL разрешим доступ
+
+   # setfacl -m "u:test:rwx" /abcd.txt 
+
+   # ls -l /abcd.txt 
+
+     -rw-rwxr--+ 1 root root 6 Jan 22 08:57 /abcd.txt
+     знак <+> в списке атрибутов говорит о наличии ACL
+
+   Посмотрим список ACL
+
+   # getfacl /abcd.txt 
+
+      getfacl: Removing leading '/' from absolute path names
+      # file: abcd.txt
+      # owner: root
+      # group: root
+      user::rw-
+      user:test:rwx
+      group::r--
+     mask::rwx
+      other::r--
+
+   Теперь команда
+
+   $ touch /abcd.txt
+
+   от имени пользователя test должна выполняться без ошибок
+
+
+   Можно устанавливать ACL для групп
+
+   # setfacl -m g:group1:r-x /abcd.txt
+
+   Можно установить для директории набор атрибутов ACL, которые будут
+   наследоваться всеми файлами, создаваемыми в этой директории
+
+Проверим, установлен ли пакет:
+ 
+   # rpm -q wget
+
+   Список файлов пакета:
+
+   # rpm -ql wget
+
+   Удалим пакет wget:
+
+   # rpm -e wget
+
+   Найдем установочный файл для пакета wget:
+
+   # find / -name wget*
+
+   Установим пакет:
+
+   # rpm -ivh <путь к файлу из команды find>
+
+   Например:
+
+   # rpm -ivh /run/media/user/CentOS-8-BaseOS-x86_64/AppStream/Packages/wget-1.19.5-7.el8.x86_64.rpm
+
+2. Использование менеджеров пакетов и репозиториев (yum, dnf)
+
+   Информация:
+   https://losst.ru/ustanovka-paketov-v-centos-7
+   # mkdir cool
+
+   # setfacl -d -m u:test:rw- cool
+
+   # cd cool 
+
+   # touch f1
+
+   # getfacl f1
+
+   Удаление всех ACL
+
+   # setfacl -b /abcd.txt
+  Удаление конкретных ACL
+
+   # setfacl -x u:test /abcd.txt
+
+Модуль 9. Работа с SSH   (2 часа т:1 п:1)
+
+·         Подключение к системе по протоколу ssh
+·         Генерация ключей ssh
+
+Практика
+
+Информация:
+
+   Для подключения к удаленным компьютерам можно использовать ssh
+
+   $ ssh root@localhost
+
+   запрашивается пароль root. При первом подключении выдается запрос на обмен
+   ключами шифрования, следует ответить <yes>
+
+   Вместо localhost можно использовать сетевое имя или IP-адрес другого
+   компьютера
+
+   Подключение по ssh без пароля.
+
+   Генерируем ключи шифрования:
+
+   $ ssh-keygen
+
+   на запросы нажимаем <Enter>
+В результате создается директория .ssh и несколько файлов в ней.
+   Отправим открытый ключ на хост-получатель:
+
+   $ ssh-copy-id -i .ssh/id_rsa.pub root@localhost
+
+   Запрашивается пароль root
+
+   Далее мы можем подключаться по ssh без пароля
+
+   $ ssh root@localhost
+
+   Или можем сразу передать команду для выполнения
+
+   $ ssh root@localhost ls -l
+статус SSH 
+# systemctl status sshd 
+
+Модуль 10. Управление сервисами и ПО (4 часа т:1 п:3)
+
+- Установка ПО из пакетов (rpm)
+- Использование менеджеров пакетов и репозиториев (yum, dnf)
+- Обновление системы и ПО
+- Регистрация действий сервисов (rsyslog)
+
+Практика
+
+1. Установка ПО из пакетов (rpm)
+
+   Информация:
+   https://ru.wikipedia.org/wiki/RPM
+   https://centos.name/?page/tipsandtricks/YumAndRpm
+Проверим, установлен ли пакет:
+
+   # rpm -q wget
+
+   Список файлов пакета:
+
+   # rpm -ql wget
+
+   Удалим пакет wget:
+
+   # rpm -e wget
+
+   Найдем установочный файл для пакета wget:
+
+   # find / -name wget*
+
+   Установим пакет:
+
+   # rpm -ivh <путь к файлу из команды find>
+
+   Например:
+
+   # rpm -ivh /run/media/user/CentOS-8-BaseOS-x86_64/AppStream/Packages/wget-1.19.5-7.el8.x86_64.rpm
+
+2. Использование менеджеров пакетов и репозиториев (yum, dnf)
+
+   Информация:
+   https://losst.ru/ustanovka-paketov-v-centos-7
+
+
+	
+
+
+
